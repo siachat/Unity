@@ -15,7 +15,6 @@ public class Gun : MonoBehaviour
 
 
 
-////////////////////////////////////////////////////////
 public List<GunStruct> guns = new List<GunStruct >();
 public int myGun = 0;
 public MeshRenderer myGunRender;
@@ -23,83 +22,34 @@ public float timeSinceLastShot;
 public float weaponSwitchDelay=0.3f;
 public float timeSinceLastWeaponSwitch;
 
-//////////////////////////////////damager/////////////////////////////////
 
 void Start()
     {
         myGunRender.material.color = guns [myGun].gunMat;
     }
 
-    //HP=hit points
-/*
-    public GameObject hpBar;
-    public int HPMax=100;
-    public int HP;
 
-    void Start()
-    {
-        HP=HPMax;
-    }
-
-private void OnCollisionEnter(Collision collision){
-    if (collision.gameObject.tag=="Bullet") {
-        TakeDamage(collision.gameObject.GetComponent<Bullet>().damage);
-    }
-}
-
-//How damege got
-public void TakeDamage (int damage)
-{
-    HP-=damage;
-
-    //lifebar
-    Vector3 newScale= hpBar.transform.localScale;
-    newScale.x=HP/ (float)HPMax;
-    hpBar.transform.localScale=newScale;
-
-    if (HP<=0){   }
-    if(HP>HPMax){HP=HPMax;}
-
-
-
-}*/
-
-//////////////////////////////
-
-    public void Damage(){}
+   
 
 
  void FixedUpdate()
     {
 
- /////////////////////////////////////////////////////////////////////////
  timeSinceLastShot+=Time.deltaTime;
  timeSinceLastWeaponSwitch+=Time.deltaTime;
 
-///////////////////////////////////////////////////////////////////////
-
 
         firingDelayLeft-=Time.deltaTime;
-         //rb.AddForce(0, 0, sidewaysForce*Time.deltaTime, ForceMode.VelocityChange);
-
-       // if(firingDelayLeft<=0){
-     // if (Input.GetMouseButton(0))
-     // {
+       
         if(timeSinceLastShot>guns[myGun].delay){
             // RaycastHit hit;
             // if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit)){   
            FireBullet();
-           
-          // }
-     
-        
         }
     
-
-     // }
    }
 
-public void FireBullet(){
+public  void FireBullet(){
 
     List<Vector3> shots = new List <Vector3>();
     if(guns[myGun].firingPattern==FiringPattern.SINGLE)
